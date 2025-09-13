@@ -1,3 +1,3 @@
 import * as Home from "./Home";
-
-export { Home };
+import * as Jobs from "./Jobs";
+export { Home,Jobs };
