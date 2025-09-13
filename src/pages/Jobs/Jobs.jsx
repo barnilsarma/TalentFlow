@@ -56,7 +56,7 @@ const Jobs=()=>{
             <div className={styles.container}>
                 {jobs.map((job)=>(
                     <div className={styles.jobCardParent} key={job.id}>
-                        <Jobs.Card />
+                        <Jobs.Card name={job.name} type={job.type} mode={job.mode} exp={job.experience} />
                     </div>
                 ))}
             </div>
