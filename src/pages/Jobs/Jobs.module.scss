@@ -30,6 +30,21 @@
         }
         .filterContainer{
             @include centeringdiv(row,center,center);
+            gap:1rem;
+            .filter{
+                font-size:1rem;
+                background-color: transparent;
+                color:#ffffff;
+                border:1px solid #ffffff;
+                border-radius: 1rem;
+                padding: 0.5rem 1rem;
+                @media screen and (min-width:400px){
+                    font-size:1.1rem;
+                }
+                .option{
+                    color:#000000;
+                }
+            }
         }
     }
 }
