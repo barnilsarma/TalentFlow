@@ -1,43 +1,21 @@
 import styles from "./Jobs.module.scss";
-import { createServer } from "miragejs"
 import {useState,useEffect} from "react";
 import * as components from "../../components";
 import axios from "axios";
-let server = createServer();
-server.get("/api/jobs", { jobs: [
-    { 
-        id: 1, 
-        name: "Software Engineer I",
-        mode:"Onsite",
-        type:"Full-Time",
-        experience:"0-2 years"
-    },
-    { 
-        id: 2, 
-        name: "Software Engineer II",
-        mode:"Onsite",
-        type:"Full-Time",
-        experience:"2-3 years" 
-    },
-    { 
-        id: 3, 
-        name: "Software Engineer III",
-        mode:"Onsite",
-        type:"Full-Time",
-        experience:"3+ years" 
-    }
-] 
-});
 const Jobs=()=>{
     const {Jobs}=components;
+    const [loading,setLoading]=useState(true);
     const [jobs,setJobs]=useState([]);
     useEffect(()=>{
         async function fetchJobs(){
             const res=await axios.get("/api/jobs");
-            if(res.status===200) setJobs(res.data.jobs);
+            if(res.status===200){
+                setJobs(res.data.jobs);
+                setLoading(false);
+            }
         }
         fetchJobs();
-    },[]);
+    },[jobs]);
     return (
         <div className={styles.Jobs}>
             <h1>Jobs</h1>
@@ -53,10 +31,11 @@ const Jobs=()=>{
                     </select>
                 </div>
             </div>
+            {loading && <h1>Loading Jobs....</h1>}
             <div className={styles.container}>
                 {jobs.map((job)=>(
                     <div className={styles.jobCardParent} key={job.id}>
-                        <Jobs.Card name={job.name} type={job.type} mode={job.mode} exp={job.experience} />
+                        <Jobs.Card id={job.id} name={job.name} type={job.type} mode={job.mode} exp={job.experience} />
                     </div>
                 ))}
             </div>
