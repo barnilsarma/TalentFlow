@@ -1,0 +1,18 @@
+@use "../../styles/mixins.scss" as *;
+.Card{
+    @include centeringdiv(column,space-between,flex-start);
+    background-color: #333333;
+    margin:1rem;
+    padding: 1rem;
+    border:0px solid transparent;
+    border-radius: 1rem;
+    .h1{
+        font-size:1.5rem;
+    }
+    .h2{
+        font-size: 1.2rem;
+    }
+    .h3{
+        font-size:1.18rem;
+    }
+}
