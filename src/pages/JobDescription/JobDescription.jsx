@@ -11,10 +11,9 @@ const JobDescription = () => {
   useEffect(() => {
     async function fetchJob() {
       try {
-        const res = await axios.get("/api/jobs");
+        const res = await axios.get(`/api/jobs/${id}`);
         if (res.status === 200) {
-          const foundJob = res.data.jobs.find((job) => job.id === parseInt(id));
-          setJob(foundJob || null);
+          setJob(res.data.job || null);
         }
       } catch (error) {
         console.error("Error fetching job:", error);

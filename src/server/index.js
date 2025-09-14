@@ -20,6 +20,12 @@ export default function makeServer() {
         return { job: newJob };
       });
 
+      this.get("/jobs/:id", (schema, request) => {
+        let id = request.params.id;
+        let job = jobs.find(j => j.id === Number(id));
+        return { job };
+      });
+
       this.get("/candidates", () => {
         return { candidates };
       });
