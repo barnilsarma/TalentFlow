@@ -11,7 +11,6 @@ const Jobs = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 10;
 
-  // Modal state
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -37,21 +36,17 @@ const Jobs = () => {
     }
   };
 
-  // Pagination
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
   const totalPages = Math.ceil(jobs.length / jobsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Validate form
   const validate = () => {
     const errs = {};
     if (!formData.name) errs.name = "Job name is required";
@@ -64,7 +59,6 @@ const Jobs = () => {
     return errs;
   };
 
-  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate();
@@ -79,10 +73,7 @@ const Jobs = () => {
       technologies: formData.technologies.split(",").map((t) => t.trim()),
     };
 
-    // Add to MirageJS server
     await axios.post("/api/jobs", newJob);
-
-    // Update local state
     setJobs((prev) => [...prev, newJob]);
     setShowModal(false);
     setFormData({
@@ -147,7 +138,6 @@ const Jobs = () => {
         ))}
       </div>
 
-      {/* Pagination */}
       <div className={styles.pagination}>
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
           <button
@@ -160,7 +150,6 @@ const Jobs = () => {
         ))}
       </div>
 
-      {/* Add Job Modal */}
       {showModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
