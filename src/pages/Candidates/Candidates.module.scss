@@ -1,0 +1,13 @@
+@use "../../styles/mixins" as *;
+.Candidates{
+    @include centeringdiv(column,center,center);
+    min-height: 100vh;
+    width:100%;
+    gap:4rem;
+    .container{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
